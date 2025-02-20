@@ -12,6 +12,7 @@
                                 class="border rounded p-2 focus:outline-none focus:ring-0"
                                 aria-label="Search clients"
                             />
+                            <Button type="button" label="Add" icon="pi pi-plus" :loading="loading" severity="contrast"/>
                         </div>
                         <DataTable 
                             :value="filteredClients" 
