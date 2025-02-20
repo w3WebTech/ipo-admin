@@ -8,8 +8,8 @@
             </TabList>
             <TabPanels>
               <TabPanel value="0">
-    <div class="card">
-        <div class="p-4">
+    <div class="">
+        <div class="py-5 px-2">
             <h2 class="text-xl font-bold mb-4">{{ props.values.ipoName }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex ">
