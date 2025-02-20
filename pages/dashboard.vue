@@ -27,9 +27,10 @@
                         <li v-for="item in navigation" :key="item.name">
                           <a :href="item.href"
                             :class="[item.current ? 'bg-indigo-700 text-white' : 'text-indigo-200 hover:bg-indigo-700 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']">
-                            <component :is="item.icon"
-                              :class="[item.current ? 'text-white' : 'text-indigo-200 group-hover:text-white', 'h-5 w-5 shrink-0']"
-                              aria-hidden="true" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+</svg>
+
                             {{ item.name }}
                           </a>
                         </li>
@@ -63,9 +64,9 @@
                 <li v-for="item in navigation" :key="item.name">
                   <a :href="item.href"
                     :class="[item.current ? 'bg-indigo-700 text-white' : 'text-indigo-200 hover:bg-indigo-700 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']">
-                    <component :is="item.icon"
-                      :class="[item.current ? 'text-white' : 'text-indigo-200 group-hover:text-white', 'h-5 w-5 shrink-0']"
-                      aria-hidden="true" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 mt-1">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+</svg>
                     {{ item.name }}
                   </a>
                 </li>
@@ -177,7 +178,9 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import newtable from './components/newtable.vue';
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
-import { Cog6ToothIcon, ChevronDownIcon } from '@heroicons/vue/24/outline';
+import { Cog6ToothIcon, ChevronDownIcon,HomeIcon} from '@heroicons/vue/24/outline';
+
+import 'primeicons/primeicons.css'
 
 const router = useRouter();
 const sidebarOpen = ref(false);
