@@ -120,9 +120,10 @@
         </div>
       </div>
   
-      <div class=" flex flex-col gap-6 items-center justify-center py-2 px-6 max-w-lg w-full">
-        <div class="flex flex-col gap-2 w-full">
-          <label for="Weakness" class="font-semibold">Company Logo</label>
+      <div class=" flex flex-col gap-6  py-2 px-6 max-w-lg w-full ">
+        <label for="Weakness" class="font-semibold ">Company Logo</label>
+        <div class="flex flex-col gap-2  py-3 w-full border border-gray-300 rounded-md">
+         
           <Toast />
           <FileUpload
             ref="fileupload"
@@ -132,7 +133,7 @@
             accept="image/*"
             :maxFileSize="1000000"
             @upload="onUpload"
-            class="border rounded-md shadow-sm p-2"
+            class="border rounded-md shadow-sm p-2 "
           />
         </div>
       </div>
