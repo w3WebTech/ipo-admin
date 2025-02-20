@@ -158,7 +158,7 @@
   @reject="handleReject"
   @updateStatus="handleUpdateStatus" 
 /> -->
-<PostData/>
+<PostData :values="selectedClient"/>
 
 
                             </div>
@@ -260,11 +260,14 @@ const fetchBSEData = async () => {
 onMounted(() => {
   fetchNSEData(); // Fetch NSE data by default
 });
-const openSidePanel = (client) => {
-  console.log("Selected Client: ", client); // Debugging
-  open.value = true;
+const selectedClient = ref({}); // Initialize as an object
 
-  // Open the side panel
+const openSidePanel = (client) => {
+  console.log("Selected Client: ", client); 
+  open.value = true;
+  selectedClient.value = client; 
+  console.log(selectedClient.value, "selectedClient.value");
+  
 };
 
 const handleSignOut = () => {
