@@ -145,7 +145,7 @@
                                 @upload="onPdfUpload"
                                 class="border rounded-md shadow-sm p-2"
                             />
-                                        </div>
+                            </div>
                         </div>
 
                         <div class="flex flex-col gap-6 items-center justify-center py-4 px-6 max-w-lg w-full">
