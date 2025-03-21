@@ -96,7 +96,7 @@
                                     />
                                 </IftaLabel>
                             </div>
-                        </div>
+ </div>
 
                         <div class="flex justify-center py-2 px-6 max-w-lg w-full">
                             <div class="flex flex-col gap-2 w-full">
@@ -133,6 +133,8 @@
 
                         <div class="flex flex-col gap-6 py-2 px-6 max-w-lg w-full">
                             <label for="PdfUpload" class="font-semibold">Upload PDF</label>
+                                         <div class="flex flex-col gap-2 py-3 w-full border border-gray-300 rounded-md">
+                                <Toast />
                             <FileUpload
                                 ref="pdfupload"
                                 mode="basic"
@@ -143,11 +145,17 @@
                                 @upload="onPdfUpload"
                                 class="border rounded-md shadow-sm p-2"
                             />
+                                        </div>
                         </div>
 
                         <div class="flex flex-col gap-6 items-center justify-center py-4 px-6 max-w-lg w-full">
                             <div class="flex flex-col gap-2 w-full">
-                                <Button label="SUBMIT" @click="submitData" severity="secondary"/>
+                                <Button 
+                                    label="SUBMIT" 
+                                    @click="submitData" 
+                                    :style="{ backgroundColor: isSubmitEnabled ? '#059669' : '#ccc' }" 
+                                    :disabled="!isSubmitEnabled"
+                                />
                             </div>
                         </div>
                     </div>
@@ -158,7 +166,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Tabs from 'primevue/tabs';
 import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
@@ -182,6 +190,10 @@ const pdfupload = ref();
 const Subscription = ref('');
 const Strength = ref('');
 const Weakness = ref('');
+
+const isSubmitEnabled = computed(() => {
+    return Subscription.value || Strength.value || Weakness.value || fileupload.value.files.length > 0 || pdfupload.value.files.length > 0;
+});
 
 const onUpload = () => {
     toast.add({
