@@ -214,8 +214,10 @@ const onPdfUpload = () => {
 };
 
 const submitData = async () => {
-    const companyLogo = await getBase64(fileupload.value.files[0]);
-    const pdfFile = await getBase64(pdfupload.value.files[0]);
+     const companyLogo = fileupload.value.files.length > 0 ? await getBase64(fileupload.value.files[0]): '';
+    
+   
+    const pdfFile = pdfupload.value.files.length > 0 ? await getBase64(pdfupload.value.files[0]) : '';
 
     const data = {
         symbol: props.values.ipoSymbol,
