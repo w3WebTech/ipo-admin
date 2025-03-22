@@ -131,23 +131,16 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col gap-6 py-2 px-6 max-w-lg w-full">
-                            <label for="PdfUpload" class="font-semibold">Upload PDF</label>
-                                         <div class="flex flex-col gap-2 py-3 w-full border border-gray-300 rounded-md">
-                                <Toast />
-                            <FileUpload
-                                ref="pdfupload"
-                                mode="basic"
-                                name="pdf[]"
-                                url="/api/upload"
-                                accept="application/pdf"
-                                :maxFileSize="2000000"
-                                @upload="onPdfUpload"
-                                class="border rounded-md shadow-sm p-2"
-                            />
-                            </div>
-                        </div>
-
+                       <div class="flex flex-col gap-6 py-2 px-6 max-w-lg w-full">
+  <label for="PdfUrl" class="font-semibold">Upload PDF URL</label>
+  <InputText
+    id="PdfUrl"
+    v-model="PdfUrl"
+    size="large"
+    aria-describedby="username-help"
+    class="p-2 border rounded-md shadow-sm"
+  />
+</div>
                         <div class="flex flex-col gap-6 items-center justify-center py-4 px-6 max-w-lg w-full">
                             <div class="flex flex-col gap-2 w-full">
                                 <Button 
@@ -213,52 +206,52 @@ const onPdfUpload = () => {
     });
 };
 
+const PdfUrl = ref('');
+
 const submitData = async () => {
-     const companyLogo = fileupload.value.files.length > 0 ? await getBase64(fileupload.value.files[0]): '';
-    
-   
-    const pdfFile = pdfupload.value.files.length > 0 ? await getBase64(pdfupload.value.files[0]) : '';
+  const companyLogo = fileupload.value.files.length > 0 ? await getBase64(fileupload.value.files[0]) : '';
 
-    const data = {
-        symbol: props.values.ipoSymbol,
-        isin: props.values.isin,
-        subscription: Subscription.value,
-        strength: Strength.value,
-        weakness: Weakness.value,
-        companyLogo: companyLogo,
-        rhp_url: pdfFile
-    };
+  const pdfFile = PdfUrl.value ?  PdfUrl.value :'';
 
-    try {
-        const response = await fetch('https://ipo.gwcindia.in/nse-api/api-ipo-details-update.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': 'PHPSESSID=58ms57q01adt66dtbuj3d42era'
-            },
-            body: JSON.stringify(data)
-        });
+  const data = {
+    symbol: props.values.ipoSymbol,
+    isin: props.values.isin,
+    subscription: Subscription.value,
+    strength: Strength.value,
+    weakness: Weakness.value,
+    companyLogo: companyLogo,
+    rhp_url: pdfFile
+  };
 
-        if (response.ok) {
-            toast.add({
-                severity: 'success',
-                summary: 'Success',
-                detail: 'Data submitted successfully',
-                life: 3000,
-            });
-        } else {
-            throw new Error('Failed to submit data');
-        }
-    } catch (error) {
-        toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: error.message,
-            life: 3000,
-        });
+  try {
+    const response = await fetch('https://ipo.gwcindia.in/nse-api/api-ipo-details-update.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': 'PHPSESSID=58ms57q01adt66dtbuj3d42era'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      toast.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Data submitted successfully',
+        life: 3000,
+      });
+    } else {
+      throw new Error('Failed to submit data');
     }
+  } catch (error) {
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: error.message,
+      life: 3000,
+    });
+  }
 };
-
 const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
